@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="starter-template text-center py-5 px-3 container">
+    <h1>Listado de productos</h1>
+  </div>
+  <div class="container">
+            {% if mensaje %}
+              <div class="alert alert-success" role="alert">
+                 Producto actualizada con exito
+              </div>
+            {% endif %}
+            {% if mensaje2 %}
+              <div class="alert alert-danger" role="alert">
+                 Producto eliminada con exito
+              </div>
+            {% endif %}
+      <div class="row col-12 justify-content-end mb-2 pr-0">
+
+          <a class="btn btn-success col-md-1" href="{% url 'registrarProducto' %}">Agregar</a>
+      </div>
+          <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Marca</th>
+              <th scope="col">Ación</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for producto in productos %}
+            <tr>
+                <th scope="row">{{ producto.id }}</th>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.categoria.nombre }}</td>
+                <td>{{ producto.marca.nombre }}</td>
+                <td><a class="btn btn-warning col-md-4" href="{% url 'editarProductos' producto.id %}">Editar</a>
+                <a class="btn btn-danger col-md-6" href="{% url 'eliminarProductos' producto.id %}">Eliminar</a></td>
+            </tr>
+          {% endfor %}
+
+          </tbody>
+        </table>
+  </div>
+
+
+{% endblock %}

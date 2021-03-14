@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="starter-template text-center py-5 px-3 container">
+    <h1>Listado de marcas</h1>
+  </div>
+  <div class="container">
+            {% if mensaje %}
+              <div class="alert alert-success" role="alert">
+                 Marca actualizada con exito
+              </div>
+            {% endif %}
+            {% if mensaje2 %}
+              <div class="alert alert-danger" role="alert">
+                 Marca eliminada con exito
+              </div>
+            {% endif %}
+      <div class="row col-12 justify-content-end mb-2 pr-0">
+
+          <a class="btn btn-success col-md-1" href="{% url 'registrarMarca' %}">Agregar</a>
+      </div>
+          <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Made</th>
+              <th scope="col">Ación</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for marca in marcas %}
+            <tr>
+                <th scope="row">{{ marca.id }}</th>
+                <td>{{ marca.nombre }}</td>
+                <td>{{ marca.hecho }}</td>
+                <td><a class="btn btn-warning col-md-4" href="{% url 'editarMarcas' marca.id %}">Editar</a>
+                <a class="btn btn-danger col-md-4" href="{% url 'eliminarMarcas' marca.id %}">Eliminar</a></td>
+            </tr>
+          {% endfor %}
+
+          </tbody>
+        </table>
+  </div>
+
+
+{% endblock %}

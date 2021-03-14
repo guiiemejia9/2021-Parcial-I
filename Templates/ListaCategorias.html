@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="starter-template text-center py-5 px-3 container">
+    <h1>Listado de categorias</h1>
+  </div>
+  <div class="container">
+            {% if mensaje %}
+              <div class="alert alert-success" role="alert">
+                 Categoria actualizada con exito
+              </div>
+            {% endif %}
+            {% if mensaje2 %}
+              <div class="alert alert-danger" role="alert">
+                 Categoria eliminada con exito
+              </div>
+            {% endif %}
+      <div class="row col-12 justify-content-end mb-2 pr-0">
+
+          <a class="btn btn-success col-md-1" href="{% url 'registrarCategoria' %}">Agregar</a>
+      </div>
+          <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Ación</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for categoria in categorias %}
+            <tr>
+                <th scope="row">{{ categoria.id }}</th>
+                <td>{{ categoria.nombre }}</td>
+                <td><a class="btn btn-warning col-md-4" href="{% url 'editarCategorias' categoria.id %}">Editar</a>
+                <a class="btn btn-danger col-md-4" href="{% url 'eliminarCategorias' categoria.id %}">Eliminar</a></td>
+            </tr>
+          {% endfor %}
+
+          </tbody>
+        </table>
+  </div>
+
+
+{% endblock %}
